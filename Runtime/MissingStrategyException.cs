@@ -11,7 +11,7 @@ namespace Morphs
             _morphValueType = morphValueType;
         }
 
-        public override string Message => $"Failed to morph ${_morphValueType.ToString()} value because no strategy was given, " +
+        public override string Message => $"Failed to morph {_morphValueType.Name} value because no strategy was given, " +
                                            "you can provide one using the With method.";
     }
 }
