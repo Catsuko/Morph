@@ -1,6 +1,6 @@
 # Morph
 
-Morph is a library that aims to simplify tweening in Unity. It uses semantic method chaining to create easy-to-understand animations that look great.
+Morph is a package that aims to simplify tweening in Unity. It uses semantic method chaining to create easy-to-understand animations that look great.
 
 ## Installation
 
