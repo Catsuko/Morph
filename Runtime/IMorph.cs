@@ -7,5 +7,11 @@ namespace Morphs
     {
         IEnumerator Calling(params Action<T>[] targets);
     }
+
+    public interface IMorph
+    {
+        IEnumerator Forwards();
+        IEnumerator Backwards();
+    }
 }
 
