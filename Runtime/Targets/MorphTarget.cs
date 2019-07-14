@@ -6,7 +6,7 @@ namespace Morphs
     [Serializable]
     public abstract class MorphTarget : MonoBehaviour
     {
-        public abstract void UpdateTo(float time);
+        public abstract void Interpolate(float time);
     }
 }
 
