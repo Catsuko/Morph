@@ -9,33 +9,32 @@ namespace Morphs
     public class SmoothMorph : IMorph
     {
         [SerializeField]
-        private List<MorphTarget> _targets = new List<MorphTarget>();
+        private AnimationCurve _easingCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
         [SerializeField]
-        private AnimationCurve _easingCurve = AnimationCurve.Linear(0, 0, 1, 1);
-
-        public SmoothMorph()
+        private float _duration = 1f;
+        
+        public IEnumerator Backwards(params IMorphTarget[] targets)
         {
+            return Run(targets, 1f);
         }
 
-        public IEnumerator Backwards()
+        public IEnumerator Forwards(params IMorphTarget[] targets)
         {
-            return Run(1f);
+            return Run(targets, 0f);
         }
 
-        public IEnumerator Forwards()
+        private IEnumerator Run (IEnumerable<IMorphTarget> targets, float directionOffset)
         {
-            return Run(0f);
-        }
+            if (_duration <= 0)
+                throw new InvalidOperationException("Morphing failed: Morph Duration must be a positive non-zero amount.");
 
-        private IEnumerator Run (float directionOffset)
-        {
             float time = 0, previousTime = 0;
             while(time < 1 || (previousTime < 1 && time >= 1))
             {
                 var easedTime = _easingCurve.Evaluate(directionOffset > 0 ? directionOffset - time : time);
-                foreach (var target in _targets) target.Interpolate(easedTime);
+                foreach (var target in targets) target.Interpolate(easedTime);
                 previousTime = time;
-                time += Time.smoothDeltaTime;
+                time += Time.smoothDeltaTime / _duration;
                 yield return null;
             }
         }
