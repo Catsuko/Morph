@@ -8,7 +8,7 @@ Morph is a package that aims to simplify tweening in Unity. Provides coroutine f
 
 ## Why
 
-Creating transitions and smooth value movements in Unity often requires writing coroutines that involve the exact same loop that repeatedly runs a lerp function until it is completed.
+Creating transitions and smooth value movements in Unity often requires writing coroutines that involve the exact same loop that will repeatedly run a lerp function until it is completed.
 Furthermore to create juicier effects, often we define many fields like speed and animation curves which can lead to a lot of clutter.
 
 Morph provides an easy to use interface that allows you to perform a transition forwards or backwards without needing write the same old boilerplate lerping coroutines that were mentioned previously.
