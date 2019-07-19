@@ -55,8 +55,7 @@ public void Interpolate(float time)
 	float opacity = Mathf.Lerp(startingOpacity, endingOpacity, time);
 }
 ```
-To change settings like the duration of the morph or the curve used to perform easing, select your MonoBehaviour in the inspector and then expand the morph property. 
-Additionally, be aware that you can pass in however many morph targets as you want at a time.
+To change settings like the duration of the Morph or the curve used to perform easing, select your MonoBehaviour in the inspector and then expand the Morph's property drawer.
 
 ## License
 
