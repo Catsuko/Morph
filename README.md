@@ -18,7 +18,7 @@ The main idea is to allow developers to focus on what they want interpolated and
 
 Getting started with Morphs is straightforward, follow these steps:
 
-1.	Include the `Morphs` namespace and add a `SmoothMorph` field to one of your MonoBehaviours. Then mark it with the `SerializeField` attribute so it will appear in the inspector.
+1.	Include the `Morphs` namespace and add a `SmoothMorph` field to one of your MonoBehaviours. Then mark it with the `SerializedField` attribute so it will appear in the inspector.
 2.	Add the `IMorphTarget` interface to your MonoBehaviour and implement the `Interpolate` method.
 3.	Start a coroutine and call the morph using the direction you wish for it to play in, don't forget to specify a target for the morph.
 
