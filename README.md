@@ -42,8 +42,8 @@ Below is a simple example of a morph that will move the target's position up 10 
 	}
 }```
 
-To change settings like the duration of the morph or the curve used to perform easing, select your SmoothObject component in the inspector. Additionally, be aware that you can
-pass in however many morph targets as you want at a time.
+To change settings like the duration of the morph or the curve used to perform easing, select your MonoBehaviour in the inspector and then expand the morph property. 
+Additionally, be aware that you can pass in however many morph targets as you want at a time.
 
 ## License
 
