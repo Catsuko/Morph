@@ -32,13 +32,13 @@ public class MorphExample : MonoBehaviour, IMorphTarget
 	[SerializeField]
 	private SmoothMorph _morph;
 
-	// Run Start as a coroutine and wait for the forwads morph.
+	// Run Start as a coroutine and wait for the forwards morph to complete.
 	public IEnumerator Start () 
 	{
 		yield return _morph.Forwards(this);
 	}
 
-	//Interpolate given a specific time step.
+	//Interpolate given a specific time step, in this example we find a position between (0,0,0) and (0,10,0).
 	public void Interpolate(float time) 
 	{
 		transform.position = Vector3.Lerp(Vector3.zero, Vector3.up * 10f, time);
