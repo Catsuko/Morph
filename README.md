@@ -24,9 +24,7 @@ Getting started with Morphs is straightforward, follow these steps:
 
 Below is a simple example of a morph that will move the target's position up 10 units:
 
-```
-
-public class MorphExample : MonoBehaviour, IMorphTarget 
+```public class MorphExample : MonoBehaviour, IMorphTarget 
 {
 	[SerializeField]
 	private SmoothMorph _morph;
@@ -42,9 +40,7 @@ public class MorphExample : MonoBehaviour, IMorphTarget
 	{
 		transform.position = Vector3.Lerp(Vector3.zero, Vector3.up * 10f, time);
 	}
-}
-
-```
+}```
 
 To change settings like the duration of the morph or the curve used to perform easing, select your SmoothObject component in the inspector. Additionally, be aware that you can
 pass in however many morph targets as you want at a time.
