@@ -36,6 +36,7 @@ public class MorphExample : MonoBehaviour, IMorphTarget {
 		yield return _morph.Forwards(this);
 	}
 
+
 	//Interpolate given a specific time step.
 	public void Interpolate(float time) {
 		transform.position = Vector3.Lerp(Vector3.zero, Vector3.up * 10f, time);
@@ -43,10 +44,12 @@ public class MorphExample : MonoBehaviour, IMorphTarget {
 
 }
 
-To change settings like the duration of the morph or the curve used to perform easing, select your SmoothObject component in the inspector!
-
-
 ```
+
+To change settings like the duration of the morph or the curve used to perform easing, select your SmoothObject component in the inspector! Additionally, be aware that you can
+pass in however many morph targets as you want at a time.
+
+
 
 
 ## License
