@@ -45,7 +45,7 @@ public class MorphExample : MonoBehaviour, IMorphTarget
 	}
 }
 ```
-Implementing Interpolate methods is pretty trivial when using any of Unity's standard Lerp methods, provide the desired start and end values and then forward the time argument.
+Implementing the Interpolate method is pretty trivial when using any of Unity's standard Lerp methods, provide the desired start and end values and then forward the time argument.
 ```
 public void Interpolate(float time) 
 {
