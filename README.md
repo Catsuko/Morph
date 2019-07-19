@@ -11,7 +11,7 @@ Morph is a package that aims to simplify tweening in Unity. Provides coroutine f
 Creating transitions and smooth value movements in Unity often requires writing coroutines that involve the exact same loop that will repeatedly run a lerp function until it is completed.
 Furthermore to create juicier effects, often we define many fields like speed and animation curves which can lead to a lot of clutter.
 
-Morph provides an easy to use interface that allows you to perform a transition forwards or backwards without needing write the same old boilerplate lerping coroutines that were mentioned previously.
+Morph provides an easy-to-use interface that allows you to perform a transition forwards or backwards without needing write the same old boilerplate lerping coroutines that were mentioned previously.
 The main idea is to allow developers to focus on what they want interpolated and have Morph take care of the timing and execution.
 
 ## Usage
@@ -45,7 +45,7 @@ public class MorphExample : MonoBehaviour, IMorphTarget
 	}
 }
 ```
-Implementing Interpolate methods is extremely straightforward when using any of Unity's standard Lerp methods, provide the desired start and end values and then forward the time argument.
+Implementing Interpolate methods is pretty trivial when using any of Unity's standard Lerp methods, provide the desired start and end values and then forward the time argument.
 ```
 public void Interpolate(float time) 
 {
