@@ -26,22 +26,22 @@ Below is a simple example of a morph that will move the target's position up 10 
 
 ```
 
-public class MorphExample : MonoBehaviour, IMorphTarget {
-	
+public class MorphExample : MonoBehaviour, IMorphTarget 
+{
 	[SerializeField]
 	private SmoothMorph _morph;
 
 	// Run Start as a coroutine and wait for the forwads morph.
-	public IEnumerator Start () {
+	public IEnumerator Start () 
+	{
 		yield return _morph.Forwards(this);
 	}
 
-
 	//Interpolate given a specific time step.
-	public void Interpolate(float time) {
+	public void Interpolate(float time) 
+	{
 		transform.position = Vector3.Lerp(Vector3.zero, Vector3.up * 10f, time);
 	}
-
 }
 
 ```
