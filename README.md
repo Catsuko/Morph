@@ -45,9 +45,6 @@ public class MorphExample : MonoBehaviour, IMorphTarget
 	}
 }
 ```
-To change settings like the duration of the morph or the curve used to perform easing, select your MonoBehaviour in the inspector and then expand the morph property. 
-Additionally, be aware that you can pass in however many morph targets as you want at a time.
-
 Implementing Interpolate methods is extremely straightforward when using any of Unity's standard Lerp methods, provide the desired start and end values and then forward the time argument.
 ```
 public void Interpolate(float time) 
@@ -58,6 +55,8 @@ public void Interpolate(float time)
 	float opacity = Mathf.Lerp(startingOpacity, endingOpacity, time);
 }
 ```
+To change settings like the duration of the morph or the curve used to perform easing, select your MonoBehaviour in the inspector and then expand the morph property. 
+Additionally, be aware that you can pass in however many morph targets as you want at a time.
 
 ## License
 
