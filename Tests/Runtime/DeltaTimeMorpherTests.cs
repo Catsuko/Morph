@@ -1,19 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Morphs;
-using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
+﻿using NUnit.Framework;
 
-namespace Morphs.Tests
+namespace Morph.Tests
 {
-    public class SmoothMorphTests
+    public class DeltaTimeMorpherTests
     {
         [Test]
         public void ForwardInterpolationStartsAtZero ()
         {
             var spy = new MorphTargetSpy();
-            var smoothMorph = new SmoothMorph();
+            var smoothMorph = new DeltaTimeMorpher();
 
             smoothMorph.Forwards(spy).MoveNext();
 
@@ -24,7 +19,7 @@ namespace Morphs.Tests
         public void ForwardInterpolationEndsAtOne ()
         {
             var spy = new MorphTargetSpy();
-            var smoothMorph = new SmoothMorph();
+            var smoothMorph = new DeltaTimeMorpher();
 
             var enumerator = smoothMorph.Forwards(spy);
             while (enumerator.MoveNext()) ;
@@ -36,7 +31,7 @@ namespace Morphs.Tests
         public void BackwardInterpolationStartsAtOne ()
         {
             var spy = new MorphTargetSpy();
-            var smoothMorph = new SmoothMorph();
+            var smoothMorph = new DeltaTimeMorpher();
 
             smoothMorph.Backwards(spy).MoveNext();
 
@@ -47,7 +42,7 @@ namespace Morphs.Tests
         public void BackwardInterpolationEndsAtZero ()
         {
             var spy = new MorphTargetSpy();
-            var smoothMorph = new SmoothMorph();
+            var smoothMorph = new DeltaTimeMorpher();
 
             var enumerator = smoothMorph.Backwards(spy);
             while (enumerator.MoveNext()) ;
@@ -55,7 +50,7 @@ namespace Morphs.Tests
             Assert.AreEqual(0, spy.Time);
         }
 
-        private class MorphTargetSpy : IMorphTarget
+        private class MorphTargetSpy : IMorph
         {
             public float Time { get; private set; }
 
@@ -64,7 +59,7 @@ namespace Morphs.Tests
                 Time = -1;
             }
 
-            public void Interpolate(float time)
+            public void Frame(float time)
             {
                 Time = time;
             }
