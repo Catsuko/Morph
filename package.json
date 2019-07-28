@@ -1,6 +1,6 @@
 {
   "name": "com.catsuko.morph",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "displayName": "Morph",
   "description": "Morph is a package that aims to simplify tweening in Unity. Use Morph to create slick animations and transitions in no time at all!",
   "unity": "2019.1",
