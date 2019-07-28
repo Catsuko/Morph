@@ -71,8 +71,8 @@ Use the `WithEasing` method on an `IMorph` to add easing. The `AnimationCurve` y
 smoother tweens.
 
 ```
-var easingCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
-var tween = morpher.Forwards(_position.WithEasing(easingCurve));
+AnimationCurve easingCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+IEnumerator tween = morpher.Forwards(_position.WithEasing(easingCurve));
 ```
 
 ### Combining Morphs
@@ -80,7 +80,7 @@ var tween = morpher.Forwards(_position.WithEasing(easingCurve));
 The `And` method can be called on a `IMorph` to combine it with other Morphs which allows you to play multiple Morphs at the same time.
 
 ```
-var tween = morpher.Forwards(_position.And(_scale));
+IEnumerator tween = morpher.Forwards(_position.And(_scale));
 ```
 
 ### Sequencing Morphs
@@ -88,7 +88,7 @@ var tween = morpher.Forwards(_position.And(_scale));
 You can easily create sequences of coroutines using the `Then` method. Useful for chaining morphs together and running them as a single coroutine.
 
 ```
-var tween = morpher.Forwards(_position).Then(morpher.Backwards(_position));
+IEnumerator tween = morpher.Forwards(_position).Then(morpher.Backwards(_position));
 ```
 
 ## License
