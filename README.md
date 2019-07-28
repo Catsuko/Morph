@@ -1,6 +1,6 @@
 # Morph
 
-Morph is a package that aims to simplify tweening in Unity. Provides coroutine friendly methods that can be used for smooth interpolation. Morphs are also easy to configure in the inspector, allowing the adjustment of handy options like duration and easing functions.
+Morph is a Unity Package that helps in creating coroutine-based tweens. Define morphs for different properties and compose great-looking effects with ease.
 
 ## Installation
 
