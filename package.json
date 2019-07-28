@@ -1,0 +1,17 @@
+{
+  "name": "com.catsuko.morph",
+  "version": "1.0.0",
+  "displayName": "Morph",
+  "description": "Morph is a package that aims to simplify tweening in Unity. Use Morph to create slick animations and transitions in no time at all!",
+  "unity": "2019.1",
+  "keywords": [
+    "animation",
+    "tweening",
+    "transition"
+  ],
+  "author": {
+    "name": "Lewis Reid",
+    "email": "lreidwilliams@gmail.com",
+    "url": "https://github.com/Catsuko/Morph"
+  }
+}

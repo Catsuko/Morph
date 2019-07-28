@@ -1,0 +1,17 @@
+{
+    "name": "Unity.Morph.Editor",
+    "references": [
+        "GUID:07cbb8d8a0015d448acef0c692abe342"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

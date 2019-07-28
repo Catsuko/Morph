@@ -1,0 +1,17 @@
+{
+    "name": "Unity.Morph.Tests",
+    "references": [
+        "GUID:07cbb8d8a0015d448acef0c692abe342"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
