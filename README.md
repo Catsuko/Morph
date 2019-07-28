@@ -8,54 +8,81 @@ Morph is a package that aims to simplify tweening in Unity. Provides coroutine f
 
 ## Why
 
-Creating transitions and smooth value movements in Unity often requires writing coroutines that involve the exact same loop that will repeatedly run a lerp function until it is completed.
-Furthermore to create juicier effects, often we define many fields like speed and animation curves which can lead to a lot of clutter.
-
-Morph provides an easy-to-use interface that allows you to perform a transition forwards or backwards without needing write the same old boilerplate lerping coroutines that were mentioned previously.
-The main idea is to allow developers to focus on what they want interpolated and have Morph take care of the timing and execution.
+Often the need arises for a simple coroutine to take a value from A to B which leads to rewriting the same loops and tween specific behaviour over and over again.
+The Morph package aims to simplify the process of creating coroutine-based tweens by doing the majority of this work for the developer.
 
 ## Usage
 
-Getting started with Morphs is straightforward, follow these steps:
+### Morphs
 
-1.	Include the `Morphs` namespace and add a `SmoothMorph` field to one of your MonoBehaviours. Then mark it with the `SerializedField` attribute so it will appear in the inspector.
-2.	Add the `IMorphTarget` interface to your MonoBehaviour and implement the `Interpolate` method.
-3.	Start a coroutine and call the morph with the direction you wish for it to travel, don't forget to specify the MonoBehaviour as the target for the morph.
-
-Below is a simple example of a morph that will move the target's position up 10 units:
+Morphs represent a change you wish to make over a period of time. This could be anything from the position of a Transform from A to B or the opacity of an image
+fading in and out. Add a new Morph is as easy as implementing the `IMorph` interface, the Frame method will define the change that should happen at a specific
+interval during the tween.
 
 ```
+using UnityEngine;
 using Morphs;
 
-public class MorphExample : MonoBehaviour, IMorphTarget 
+public class PositionMorph : MonoBehaviour 
 {
-	[SerializeField]
-	private SmoothMorph _morph;
+	[SerializedField]
+	private Vector3 _start, _end;
 
-	// Run Start as a coroutine and wait for the forwards morph to complete.
-	public IEnumerator Start () 
+	public void Frame (float time) 
 	{
-		yield return _morph.Forwards(this);
+		transform.position = Vector3.Lerp(_start, _end, time);
 	}
+}
 
-	//Interpolate given a specific time step, in this example we find a position between (0,0,0) and (0,10,0).
-	public void Interpolate(float time) 
+```
+
+### Morphers
+
+Morphers are used to play Morphs, both the `Forwards` and `Backwards` methods will return an `IEnumerator` which can be started as a coroutine.
+
+```
+using UnityEngine;
+using Morphs;
+
+public class MorpherExample : MonoBehaviour
+{
+	[SerializedField]
+	private PositionMorph _position;
+	[SerializedField]
+	private SmoothMorpher _morpher;
+
+	public void Play () 
 	{
-		transform.position = Vector3.Lerp(Vector3.zero, Vector3.up * 10f, time);
+		StartCoroutine(_morpher.Forwards(_position));
 	}
 }
 ```
-Implementing the Interpolate method is pretty trivial when using any of Unity's standard Lerp methods, provide the desired start and end values and then forward the time argument.
+
+### Easing
+
+Use the `WithEasing` method on an `IMorph` to add easing. The `AnimationCurve` you provide will be used to offset the time allowing you to create
+smoother tweens.
+
 ```
-public void Interpolate(float time) 
-{
-	Color currentColor = Color.Lerp(startingColor, endingColor, time);
-	Vector3 rotationAngles = Vector3.Lerp(startingAngles, endingAngles, time);
-	Vector2 position = Vector2.Lerp(startingPosition, endingPosition, time);
-	float opacity = Mathf.Lerp(startingOpacity, endingOpacity, time);
-}
+var easingCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+var tween = morpher.Forwards(_position.WithEasing(easingCurve));
 ```
-To change settings like the duration of the Morph or the curve used to perform easing, select your MonoBehaviour in the inspector and then expand the Morph's property drawer.
+
+### Combining Morphs
+
+The `And` method can be called on a `IMorph` to combine it with other Morphs which allows you to play multiple Morphs at the same time.
+
+```
+var tween = morpher.Forwards(_position.And(_scale));
+```
+
+### Sequencing Morphs
+
+You can easily create sequences of coroutines using the `Then` method. Useful for chaining morphs together and running them as a single coroutine.
+
+```
+var tween = morpher.Forwards(_position).Then(morpher.Backwards(_position));
+```
 
 ## License
 

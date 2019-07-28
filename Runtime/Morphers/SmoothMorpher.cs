@@ -5,11 +5,20 @@ using UnityEngine;
 namespace Morph
 {
     [Serializable]
-    public class DeltaTimeMorpher : IMorpher
+    public class SmoothMorpher : IMorpher
     {
         [SerializeField]
         private float _duration = 1f;
-        
+
+        public SmoothMorpher()
+        {
+        }
+
+        public SmoothMorpher(float duration)
+        {
+            _duration = duration;
+        }
+
         public IEnumerator Backwards(IMorph target)
         {
             return Run(target, 1f);
@@ -27,7 +36,7 @@ namespace Morph
             {
                 target.Frame(Mathf.Clamp(directionOffset > 0 ? directionOffset - time : time, 0, 1));
                 previousTime = time;
-                time += Time.smoothDeltaTime / _duration;
+                time += Time.deltaTime / _duration;
                 yield return null;
             }
         }
