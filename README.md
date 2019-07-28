@@ -4,7 +4,14 @@ Morph is a package that aims to simplify tweening in Unity. Provides coroutine f
 
 ## Installation
 
-`TODO`
+Add the Morph Package by editing your `manifest.json` file to include the following line:
+
+```
+{
+  "dependencies": {
+    "com.catsuko.morph": "https://github.com/Catsuko/Morph.git"
+}
+```
 
 ## Why
 
