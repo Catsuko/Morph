@@ -30,7 +30,7 @@ interval during the tween.
 using UnityEngine;
 using Morphs;
 
-public class PositionMorph : MonoBehaviour 
+public class PositionMorph : MonoBehaviour, IMorph
 {
 	[SerializedField]
 	private Vector3 _start, _end;
