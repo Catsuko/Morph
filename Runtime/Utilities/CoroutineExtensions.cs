@@ -29,6 +29,16 @@ namespace Morph
             foreach (var routine in sequence)
                 yield return routine;
         }
+
+        public static IEnumerator Repeat (this IEnumerator target, int count = -1)
+        {
+            while(count != 0)
+            {
+                yield return target;
+                if (count > 0)
+                    count--;
+            }
+        }
     }
 }
 
