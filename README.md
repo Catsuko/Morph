@@ -28,7 +28,7 @@ interval during the tween.
 
 ```
 using UnityEngine;
-using Morphs;
+using Morph;
 
 public class PositionMorph : IMorph
 {
@@ -56,7 +56,7 @@ Morphers are used to play Morphs, both the `Forwards` and `Backwards` methods wi
 
 ```
 using UnityEngine;
-using Morphs;
+using Morph;
 
 public class MorpherExample : MonoBehaviour
 {
