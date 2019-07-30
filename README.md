@@ -32,17 +32,19 @@ using Morphs;
 
 public class PositionMorph : IMorph
 {
-	private Vector3 _start, _end;
+	private readonly Vector3 _start, _end;
+	private readonly Transform _transform;
 
-	public PositionMorph (Vector3 start, Vector3 end) 
+	public PositionMorph (Vector3 start, Vector3 end, Transform transform) 
 	{
 		_start = start;
 		_end = end;
+		_transform = transform;
 	}
 
 	public void Frame (float time) 
 	{
-		transform.position = Vector3.Lerp(_start, _end, time);
+		_transform.position = Vector3.Lerp(_start, _end, time);
 	}
 }
 
@@ -59,13 +61,12 @@ using Morphs;
 public class MorpherExample : MonoBehaviour
 {
 	[SerializedField]
-	private PositionMorph _position;
-	[SerializedField]
 	private SmoothMorpher _morpher;
 
-	public void Play () 
+	public void Start () 
 	{
-		StartCoroutine(_morpher.Forwards(_position));
+		IMorph positionMorph = new PositionMorph(Vector3.zero, Vector3.one, transform);
+		StartCoroutine(_morpher.Forwards(positionMorph));
 	}
 }
 ```
