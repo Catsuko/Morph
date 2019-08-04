@@ -3,7 +3,8 @@
     internal class MorphSpy : IMorph
     {
         public float Time { get; private set; }
-        public bool WasCalled { get { return Time >= 0; } }
+        public int FrameCount { get; private set; }
+        public bool WasCalled { get { return FrameCount > 0; } }
 
         public MorphSpy()
         {
@@ -12,6 +13,7 @@
 
         public void Frame(float time)
         {
+            FrameCount++;
             Time = time;
         }
     }
