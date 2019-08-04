@@ -91,6 +91,17 @@ You can easily create sequences of coroutines using the `Then` method. Useful fo
 IEnumerator tween = morpher.Forwards(_position).Then(morpher.Backwards(_position));
 ```
 
+### Repeating Morphs
+
+Loop morphs a given number of times or indefinitely:
+
+```
+// Morph position forwards and repeat 5 times
+IEnumerator tween = morpher.Forwards(_position).Repeat(5);
+// Morph position forwards and repeat forever
+IEnumerator tween = morpher.Fowards(_position).Repeat();
+```
+
 ## License
 
 This package is available as open source under the terms of the MIT License.

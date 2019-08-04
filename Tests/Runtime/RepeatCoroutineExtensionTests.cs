@@ -39,6 +39,18 @@ namespace Morph.Tests
             Assert.AreEqual(3, spy.TimesRepeated);
         }
 
+        [UnityTest]
+        public IEnumerator RepeatsMorphThenOtherMorph ()
+        {
+            var morpher = new SmoothMorpher(0.1f);
+            var spy = new MorphSpy();
+            var otherSpy = new MorphSpy();
+
+            yield return morpher.Forwards(spy).Then(morpher.Backwards(otherSpy)).Repeat(1);
+
+            Assert.AreEqual(1, otherSpy.TimesRepeated);
+        }
+
         [Test]
         public void RepeatWithNoArgumentLastsForever ()
         {
