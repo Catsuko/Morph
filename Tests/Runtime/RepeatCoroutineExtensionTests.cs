@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using NUnit.Framework;
-using UnityEngine;
 using UnityEngine.TestTools;
 
 namespace Morph.Tests
@@ -12,42 +9,44 @@ namespace Morph.Tests
         [UnityTest]
         public IEnumerator RepeatsASingleTime ()
         {
-            var spy = new EnumeratorSpy();
+            var morpher = new SmoothMorpher(0.1f);
+            var spy = new MorphSpy();
 
-            yield return spy.Run();
-            yield return spy.Run();
-            //yield return spy.Run().Repeat(1);
+            yield return morpher.Forwards(spy).Repeat(1);
 
-            Assert.AreEqual(2, spy.TimesEnumerated);
+            Assert.AreEqual(1, spy.TimesRepeated);
         }
 
         [UnityTest]
         public IEnumerator RepeatsTwice ()
         {
-            var spy = new EnumeratorSpy();
+            var morpher = new SmoothMorpher(0.1f);
+            var spy = new MorphSpy();
 
-            yield return spy.Run().Repeat(2);
+            yield return morpher.Forwards(spy).Repeat(2);
 
-            Assert.AreEqual(3, spy.TimesEnumerated);
+            Assert.AreEqual(2, spy.TimesRepeated);
         }
 
         [UnityTest]
         public IEnumerator RepeatsThreeTimes ()
         {
-            var spy = new EnumeratorSpy();
+            var morpher = new SmoothMorpher(0.1f);
+            var spy = new MorphSpy();
 
-            yield return spy.Run().Repeat(3);
+            yield return morpher.Forwards(spy).Repeat(3);
 
-            Assert.AreEqual(4, spy.TimesEnumerated);
+            Assert.AreEqual(3, spy.TimesRepeated);
         }
 
         [Test]
         public void RepeatWithNoArgumentLastsForever ()
         {
-            var spy = new EnumeratorSpy();
-            var enumerator = spy.Run().Repeat();
-            var foreverThreshold = 1000;
+            var morpher = new SmoothMorpher(0.1f);
+            var spy = new MorphSpy();
+            var enumerator = morpher.Forwards(spy).Repeat();
 
+            var foreverThreshold = 1000;
             for (int i = 0; i < foreverThreshold; i++)
             {
                 enumerator.MoveNext();
@@ -56,14 +55,15 @@ namespace Morph.Tests
             Assert.IsTrue(enumerator.MoveNext());
         }
 
-        private class EnumeratorSpy
+        private class MorphSpy : IMorph
         {
-            public int TimesEnumerated { get; private set; }
+            public int TimesRepeated { get; private set; }
+            private float _previous = -1f;
 
-            public IEnumerator Run ()
+            public void Frame(float time)
             {
-                TimesEnumerated++;
-                yield return null;
+                if (time < _previous) TimesRepeated++;
+                _previous = time;
             }
         }
     }

@@ -21,12 +21,12 @@ namespace Morph
 
         public IEnumerator Backwards(IMorph target)
         {
-            return Run(target, 1f);
+            return new MorphRun(() => Run(target, 1f));
         }
 
         public IEnumerator Forwards(IMorph target)
         {
-            return Run(target, 0f);
+            return new MorphRun(() => Run(target, 0f));
         }
 
         private IEnumerator Run (IMorph target, float directionOffset)

@@ -32,8 +32,11 @@ namespace Morph
 
         public static IEnumerator Repeat (this IEnumerator target, int count = -1)
         {
+            yield return target;
+
             while(count != 0)
             {
+                target.Reset();
                 yield return target;
                 if (count > 0)
                     count--;
