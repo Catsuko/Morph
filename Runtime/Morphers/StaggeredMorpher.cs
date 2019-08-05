@@ -19,18 +19,15 @@ namespace Morph
 
         public IEnumerator Backwards(IMorph target)
         {
-            var steps = _intermediateSteps + 2;
-            var waitBetweenSteps = new WaitForSeconds(_durationInSeconds / steps);
-            var stepSize = 1f / (steps - 1);
-
-            for (int i = steps - 1; i >= 0; i--)
-            {
-                target.Frame(Mathf.Clamp(i * stepSize, 0, 1));
-                yield return waitBetweenSteps;
-            }
+            return Run(target, 1f);
         }
 
         public IEnumerator Forwards(IMorph target)
+        {
+            return Run(target, 0f);
+        }
+
+        private IEnumerator Run (IMorph target, float directionOffset)
         {
             var steps = _intermediateSteps + 2;
             var waitBetweenSteps = new WaitForSeconds(_durationInSeconds / steps);
@@ -38,7 +35,7 @@ namespace Morph
 
             for (int i = 0; i < steps; i++)
             {
-                target.Frame(Mathf.Clamp(i * stepSize, 0, 1));
+                target.Frame(Mathf.Clamp01(Mathf.Abs(directionOffset - i * stepSize)));
                 yield return waitBetweenSteps;
             }
         }

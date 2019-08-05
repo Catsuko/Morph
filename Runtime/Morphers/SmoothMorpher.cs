@@ -34,7 +34,7 @@ namespace Morph
             float time = 0, previousTime = 0;
             while(_duration > 0 && (time < 1 || (previousTime < 1 && time >= 1)))
             {
-                target.Frame(Mathf.Clamp(directionOffset > 0 ? directionOffset - time : time, 0, 1));
+                target.Frame(Mathf.Abs(directionOffset - Mathf.Clamp01(time)));
                 previousTime = time;
                 time += Time.deltaTime / _duration;
                 yield return null;
