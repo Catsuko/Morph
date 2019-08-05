@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Added
+ - StaggeredMorpher that morphs using a fixed number of steps
+
 ## [0.0.3] - 7/28/2019
 ### Fixed
 - Reworked .gitignore so it won't ignore future .meta files
