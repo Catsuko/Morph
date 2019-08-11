@@ -2,102 +2,48 @@
 
 namespace Morph.Tests
 {
+    [TestFixtureSource("MorpherFixtureArgs")]
     public class StaggeredMorpherTests
     {
-        [Test]
-        public void ForwardStartsAtZero ()
+        private readonly IMorpher _morpher;
+        private readonly int _intermediateSteps;
+        private MorphSpy _spy { get; set; }
+
+        static object[] MorpherFixtureArgs =
         {
-            var spy = new MorphSpy();
-            var staggeredMorph = new StaggeredMorpher(0);
+            new object[] { new StaggeredMorpher(1), 1 },
+            new object[] { new StaggeredMorpher(3), 3 },
+            new object[] { new StaggeredMorpher(5), 5 },
+        };
 
-            staggeredMorph.Forwards(spy).MoveNext();
+        public StaggeredMorpherTests (IMorpher morpher, int intermediateSteps)
+        {
+            _morpher = morpher;
+            _intermediateSteps = intermediateSteps;
+        }
 
-            Assert.AreEqual(0, spy.Time);
+        [SetUp]
+        public void InitSpy()
+        {
+            _spy = new MorphSpy();
         }
 
         [Test]
-        public void ForwardEndsAtOne ()
+        public void FramesMatchIntermediateStepCountPlusTwo ()
         {
-            var spy = new MorphSpy();
-            var staggeredMorph = new StaggeredMorpher(0);
-
-            var enumerator = staggeredMorph.Forwards(spy);
+            var enumerator = _morpher.Forwards(_spy);
             while (enumerator.MoveNext()) ;
-
-            Assert.AreEqual(1f, spy.Time);
+            Assert.AreEqual(_intermediateSteps + 2, _spy.FrameCount);
         }
 
         [Test]
-        public void BackwardsStartsAtOne()
+        public void FirstIntermediateFrameHasExpectedTime ()
         {
-            var spy = new MorphSpy();
-            var staggeredMorpher = new StaggeredMorpher(0);
-
-            staggeredMorpher.Backwards(spy).MoveNext();
-
-            Assert.AreEqual(1, spy.Time);
-        }
-
-        [Test]
-        public void BackwardsEndsAtZero()
-        {
-            var spy = new MorphSpy();
-            var staggeredMorpher = new StaggeredMorpher(0);
-
-            var enumerator = staggeredMorpher.Backwards(spy);
-            while (enumerator.MoveNext()) ;
-
-            Assert.AreEqual(0, spy.Time);
-        }
-
-        [Test]
-        public void FramesThreeTimesWithOneIntermediateStep ()
-        {
-            var spy = new MorphSpy();
-            var staggeredMorpher = new StaggeredMorpher(1);
-
-            var enumerator = staggeredMorpher.Forwards(spy);
-            while (enumerator.MoveNext()) ;
-
-            Assert.AreEqual(3, spy.FrameCount);
-        }
-
-        [Test]
-        public void FirstIntermediateFrameIsHalfWithOneIntermediateFrame ()
-        {
-            var spy = new MorphSpy();
-            var staggeredMorpher = new StaggeredMorpher(1);
-
-            var enumerator = staggeredMorpher.Backwards(spy);
+            var enumerator = _morpher.Forwards(_spy);
             enumerator.MoveNext();
             enumerator.MoveNext();
-
-            Assert.AreEqual(0.5f, spy.Time);
-        }
-
-        [Test]
-        public void FramesFourTimesWithTwoIntermediateSteps ()
-        {
-            var spy = new MorphSpy();
-            var staggeredMorpher = new StaggeredMorpher(2);
-
-            var enumerator = staggeredMorpher.Forwards(spy);
-            while (enumerator.MoveNext()) ;
-
-            Assert.AreEqual(4, spy.FrameCount);
-        }
-
-        [Test]
-        public void FirstIntermediateFrameIsAThirdWithTwoIntermediateFrames ()
-        {
-            var spy = new MorphSpy();
-            var staggeredMorpher = new StaggeredMorpher(2);
-
-            var enumerator = staggeredMorpher.Forwards(spy);
-            enumerator.MoveNext();
-            enumerator.MoveNext();
-
-            Assert.AreEqual(0.333f, spy.Time, 0.01);
+            var expectedTime = 1f / (_intermediateSteps + 1);
+            Assert.AreEqual(expectedTime, _spy.Time);
         }
     }
 }
