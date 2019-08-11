@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 ### Added
  - StaggeredMorpher that morphs using a fixed number of steps
+### Changed
+ - Use TestFixtureSources to reduce test duplication
 
 ## [0.0.3] - 7/28/2019
 ### Fixed
