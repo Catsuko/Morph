@@ -33,7 +33,7 @@ namespace Morph.Tests
         public void ForwardStartsAtZero()
         {
             _morpher.Forwards(_spy).MoveNext();
-            Assert.AreEqual(0, _spy.Time);
+            Assert.AreEqual(0, _spy.Time, 0.001);
         }
 
         [Test]
@@ -41,14 +41,14 @@ namespace Morph.Tests
         {
             var enumerator = _morpher.Forwards(_spy);
             while (enumerator.MoveNext()) ;
-            Assert.AreEqual(1f, _spy.Time);
+            Assert.AreEqual(1f, _spy.Time, 0.001);
         }
 
         [Test]
         public void BackwardsStartsAtOne()
         {
             _morpher.Backwards(_spy).MoveNext();
-            Assert.AreEqual(1, _spy.Time);
+            Assert.AreEqual(1, _spy.Time, 0.001);
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace Morph.Tests
         {
             var enumerator = _morpher.Backwards(_spy);
             while (enumerator.MoveNext()) ;
-            Assert.AreEqual(0, _spy.Time);
+            Assert.AreEqual(0, _spy.Time, 0.001);
         }
     }
 }

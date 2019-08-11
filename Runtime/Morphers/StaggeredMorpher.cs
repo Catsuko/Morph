@@ -32,7 +32,6 @@ namespace Morph
             var steps = _intermediateSteps + 2;
             var waitBetweenSteps = new WaitForSeconds(_durationInSeconds / steps);
             var stepSize = 1f / (steps - 1);
-
             for (int i = 0; i < steps; i++)
             {
                 target.Frame(Mathf.Clamp01(Mathf.Abs(directionOffset - i * stepSize)));
